@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPDB SMP Jayakarta</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Formulir PPDB SMP Jayakarta</h1>
+        <form id="ppdbForm">
+            <input type="text" id="nama" placeholder="Nama Lengkap" required>
+            <input type="text" id="nisn" placeholder="NISN" required>
+            <input type="text" id="asal" placeholder="Asal SD/MI" required>
+            <select id="kelas">
+                <option value="Reguler">Reguler</option>
+                <option value="Bilingual">Bilingual</option>
+            </select>
+            <button type="submit">Kirim Pendaftaran</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('ppdbForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Terima kasih! Pendaftaran berhasil. Khusus untuk Ibu Siti Khodijah: Makasih ya Bu, sudah jadi guru yang luar biasa buat kami semua!');
+        });
+    </script>
+</body>
+</html>
