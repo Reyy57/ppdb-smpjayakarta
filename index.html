@@ -5,81 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PPDB SMP Jayakarta</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
         body { 
-            font-family: 'Segoe UI', Arial, sans-serif; 
-            background: linear-gradient(135deg, #a8e063, #56ab2f); 
-            display: flex; justify-content: center; padding: 20px; min-height: 100vh; margin: 0; 
+            font-family: 'Inter', sans-serif; 
+            background: #f0f2f5; 
+            display: flex; justify-content: center; padding: 20px; min-height: 100vh; margin: 0;
+            color: #333;
         }
         .container { 
-            background: white; padding: 30px; border-radius: 20px; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 450px; 
+            background: white; padding: 40px; border-radius: 24px; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06); width: 100%; max-width: 450px;
+            border: 1px solid rgba(255,255,255,0.3);
         }
         .logo { 
-            width: 100%; max-width: 150px; height: auto; display: block; 
-            margin: 0 auto 20px auto; object-fit: contain; 
+            width: 120px; height: 120px; display: block; 
+            margin: 0 auto 25px auto; object-fit: contain; 
+            border-radius: 20px; padding: 5px;
         }
-        h1 { font-size: 1.5rem; text-align: center; color: #2d5a27; margin-bottom: 25px; }
-        .row { display: flex; gap: 10px; }
-        .col { flex: 1; }
-        label { font-size: 0.9rem; font-weight: 600; margin-top: 10px; display: block; color: #444; }
-        input, select, textarea { display: block; width: 100%; margin: 8px 0 10px 0; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        h1 { font-size: 1.6rem; text-align: center; color: #1a1a1a; margin-bottom: 30px; letter-spacing: -0.5px; }
+        
+        label { font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; display: block; color: #666; }
+        input, select, textarea { 
+            display: block; width: 100%; margin-bottom: 20px; padding: 14px; 
+            border: 2px solid #eef0f2; border-radius: 12px; font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        input:focus, textarea:focus { border-color: #56ab2f; outline: none; box-shadow: 0 0 0 4px rgba(86,171,47,0.1); }
+        
         button { 
-            width: 100%; padding: 14px; background-color: #56ab2f; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 15px; transition: 0.3s;
+            width: 100%; padding: 16px; background: #2d5a27; color: white; border: none; 
+            border-radius: 12px; font-weight: 600; cursor: pointer; transition: 0.3s;
         }
-        button:hover { background-color: #4a9128; }
+        button:hover { background: #3e7a37; transform: translateY(-2px); }
+        
         .wa-btn { 
-            background-color: #25d366; margin-top: 20px; text-align: center; text-decoration: none; display: block; padding: 14px; color: white; border-radius: 8px; font-weight: bold; transition: 0.3s;
+            background: #e8f5e9; color: #2e7d32; margin-top: 15px; text-align: center; 
+            text-decoration: none; display: block; padding: 16px; border-radius: 12px; 
+            font-weight: 600; transition: 0.3s;
         }
-        .wa-btn:hover { background-color: #1da851; }
-        .footer-text { text-align: center; font-size: 0.8rem; color: #888; margin-top: 25px; }
+        .wa-btn:hover { background: #d0eadd; }
+        
+        .footer-text { text-align: center; font-size: 0.75rem; color: #999; margin-top: 30px; }
     </style>
 </head>
 <body>
     <div class="container">
-        <img src="IMG-20260606-WA0002.jpg" alt="Logo SMP Jayakarta" class="logo">
-        
-        <h1>Formulir PPDB SMP Jayakarta</h1>
+        <img src="IMG-20260606-WA0002.jpg" alt="Logo" class="logo">
+        <h1>Pendaftaran PPDB</h1>
         
         <form action="https://formspree.io/f/xpqeqrpy" method="POST">
-            <div class="row">
-                <div class="col">
-                    <label>First Name</label>
-                    <input type="text" name="first_name" required>
-                </div>
-                <div class="col">
-                    <label>Last Name</label>
-                    <input type="text" name="last_name" required>
-                </div>
-            </div>
-            
+            <label>Nama Depan</label>
+            <input type="text" name="first_name" required>
+            <label>Nama Belakang</label>
+            <input type="text" name="last_name" required>
             <label>Alamat Lengkap</label>
             <textarea name="alamat" rows="2" required></textarea>
-            
             <label>Asal Sekolah SD</label>
             <input type="text" name="asal_sekolah" required>
-            
             <label>Nama Orang Tua/Wali</label>
             <input type="text" name="nama_ortu" required>
-            
             <label>Nomor WhatsApp</label>
             <input type="tel" name="whatsapp" required>
-            
-            <label>Pilihan Gelombang</label>
+            <label>Gelombang</label>
             <select name="gelombang">
                 <option value="Gelombang 1">Gelombang 1</option>
                 <option value="Gelombang 2">Gelombang 2</option>
             </select>
-            
             <label>Minat Ekstrakurikuler</label>
-            <input type="text" name="ekstrakurikuler" placeholder="Contoh: Futsal, Pramuka, Musik">
+            <input type="text" name="ekstrakurikuler">
             
             <button type="submit">Kirim Pendaftaran</button>
         </form>
         
-        <a href="https://wa.me/6283136106128" class="wa-btn">Tanya Admin via WhatsApp</a>
+        <a href="https://wa.me/6283136106128" class="wa-btn">Konsultasi via WhatsApp</a>
         
         <div class="footer-text">
-            Kado perpisahan dari Reyfalka untuk SMP Jayakarta 😊
+            © 2026 SMP Jayakarta | Dibuat dengan sepenuh hati
         </div>
     </div>
 </body>
