@@ -13,27 +13,34 @@
             display: flex; justify-content: center; padding: 20px; min-height: 100vh; margin: 0;
             color: #333;
         }
+        
+        /* Animasi Fade-in */
         .container { 
             background: white; padding: 40px; border-radius: 24px; 
             box-shadow: 0 20px 40px rgba(0,0,0,0.08); width: 100%; max-width: 450px;
+            animation: fadeIn 0.8s ease-out;
         }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .logo { 
             width: 120px; height: 120px; display: block; 
             margin: 0 auto 25px auto; object-fit: contain; 
             border-radius: 20px;
         }
-        h1 { font-size: 1.5rem; text-align: center; color: #1a1a1a; margin-bottom: 10px; }
+        h1 { font-size: 1.5rem; text-align: center; color: #1a1a1a; margin-bottom: 15px; }
         
-        /* Box Informasi */
         .info-box { 
             background: #f1f8e9; padding: 15px; border-radius: 12px; 
-            margin-bottom: 25px; font-size: 0.85rem; color: #2e7d32; line-height: 1.5;
+            margin-bottom: 25px; font-size: 0.85rem; color: #2e7d32;
         }
         .info-box ol { padding-left: 20px; margin: 5px 0 0 0; }
         .info-box li { margin-bottom: 5px; }
 
         label { font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; display: block; color: #666; }
-        input[type="text"], input[type="tel"], select, textarea { 
+        input, select, textarea { 
             display: block; width: 100%; margin-bottom: 20px; padding: 14px; 
             border: 2px solid #eef0f2; border-radius: 12px; font-size: 1rem;
             transition: all 0.3s ease; box-sizing: border-box;
@@ -42,21 +49,22 @@
         
         .checkbox-group { margin-bottom: 20px; padding: 15px; border: 2px solid #eef0f2; border-radius: 12px; }
         .checkbox-item { display: flex; align-items: center; margin-bottom: 10px; }
-        .checkbox-item input { width: auto; margin-bottom: 0; margin-right: 12px; cursor: pointer; }
-        .checkbox-item label { margin-bottom: 0; cursor: pointer; }
 
+        /* Tombol dengan efek Hover */
         button { 
             width: 100%; padding: 16px; background: #2d5a27; color: white; border: none; 
-            border-radius: 12px; font-weight: 600; cursor: pointer; transition: 0.3s;
+            border-radius: 12px; font-weight: 600; cursor: pointer; 
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
-        button:hover { background: #3e7a37; transform: translateY(-2px); }
+        button:hover { background: #387031; transform: scale(1.02); box-shadow: 0 5px 15px rgba(45,90,39,0.3); }
+        button:active { transform: scale(0.98); }
         
         .wa-btn { 
             background: #e8f5e9; color: #2e7d32; margin-top: 15px; text-align: center; 
             text-decoration: none; display: block; padding: 16px; border-radius: 12px; 
-            font-weight: 600; transition: 0.3s;
+            font-weight: 600; transition: all 0.3s ease;
         }
-        .wa-btn:hover { background: #d0eadd; }
+        .wa-btn:hover { background: #d0eadd; transform: scale(1.02); }
         
         .footer-text { text-align: center; font-size: 0.75rem; color: #999; margin-top: 30px; }
     </style>
@@ -73,7 +81,7 @@
                 <li>Pilih gelombang pendaftaran yang tersedia.</li>
                 <li>Pilih ekstrakurikuler sesuai minat.</li>
                 <li>Klik "Kirim Pendaftaran" untuk menyimpan data.</li>
-                <li>Chat WhatsApp kami untuk verifikasi berkas (Akta/KK).</li>
+                <li>Chat WhatsApp untuk verifikasi berkas (Akta/KK).</li>
             </ol>
         </div>
         
