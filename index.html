@@ -32,14 +32,17 @@
             max-width: 450px; 
         }
 
-        .logo { width: 120px; display: block; margin: 0 auto 15px auto; }
+        .logo { width: 100px; display: block; margin: 0 auto 20px auto; border-radius: 50%; }
+        h1 { font-size: 1.5rem; text-align: center; color: #333; margin-bottom: 25px; }
+        
+        .row { display: flex; gap: 10px; }
+        .col { flex: 1; }
 
-        h1 { font-size: 1.5rem; text-align: center; color: #333; margin-bottom: 20px; }
-        label { font-size: 0.9rem; font-weight: 600; margin-top: 15px; display: block; color: #444; }
-        input, select, textarea { display: block; width: 100%; margin: 8px 0 15px 0; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        label { font-size: 0.9rem; font-weight: 600; margin-top: 10px; display: block; color: #444; }
+        input, select, textarea { display: block; width: 100%; margin: 8px 0 10px 0; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
         
         button { 
-            width: 100%; padding: 14px; background-color: #764ba2; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.3s;
+            width: 100%; padding: 14px; background-color: #764ba2; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 15px; transition: 0.3s;
         }
         button:hover { background-color: #5a377d; transform: scale(1.02); }
         
@@ -53,12 +56,21 @@
 </head>
 <body>
     <div class="container">
-        <img src="logo.png" alt="Logo SMP Jayakarta" class="logo">
+        <img src="554647.jpg" alt="Logo SMP Jayakarta" class="logo">
         
-        <h1>PPDB SMP Jayakarta</h1>
+        <h1>Formulir PPDB SMP Jayakarta</h1>
+        
         <form action="https://formspree.io/f/xpqeqrpy" method="POST">
-            <label>Nama Lengkap</label>
-            <input type="text" name="nama" required>
+            <div class="row">
+                <div class="col">
+                    <label>First Name</label>
+                    <input type="text" name="first_name" required>
+                </div>
+                <div class="col">
+                    <label>Last Name</label>
+                    <input type="text" name="last_name" required>
+                </div>
+            </div>
             
             <label>Alamat Lengkap</label>
             <textarea name="alamat" rows="2" required></textarea>
@@ -75,7 +87,7 @@
             <label>Pilihan Gelombang</label>
             <select name="gelombang">
                 <option value="Gelombang 1">Gelombang 1</option>
-                <option value="Gelombang 2">Gelombang 2</option>
+                <option value="Gelombang 2">Gelombang 2</></option>
             </select>
             
             <label>Minat Ekstrakurikuler</label>
