@@ -32,7 +32,17 @@
             max-width: 450px; 
         }
 
-        .logo { width: 100px; display: block; margin: 0 auto 20px auto; border-radius: 50%; }
+        /* Perbaikan Logo */
+        .logo { 
+            width: 120px; 
+            height: 120px; 
+            display: block; 
+            margin: 0 auto 20px auto; 
+            border-radius: 50%; 
+            object-fit: contain; 
+            background-color: white;
+        }
+
         h1 { font-size: 1.5rem; text-align: center; color: #333; margin-bottom: 25px; }
         
         .row { display: flex; gap: 10px; }
@@ -56,6 +66,7 @@
 </head>
 <body>
     <div class="container">
+        <!-- Pastikan nama file gambar di folder github sama dengan ini -->
         <img src="554647.jpg" alt="Logo SMP Jayakarta" class="logo">
         
         <h1>Formulir PPDB SMP Jayakarta</h1>
@@ -87,7 +98,7 @@
             <label>Pilihan Gelombang</label>
             <select name="gelombang">
                 <option value="Gelombang 1">Gelombang 1</option>
-                <option value="Gelombang 2">Gelombang 2</></option>
+                <option value="Gelombang 2">Gelombang 2</option>
             </select>
             
             <label>Minat Ekstrakurikuler</label>
