@@ -5,18 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PPDB SMP Jayakarta</title>
     <style>
-        body { font-family: Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; justify-content: center; padding: 20px; }
-        .container { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); width: 100%; max-width: 500px; }
-        h1 { font-size: 1.4rem; text-align: center; color: #333; }
-        label { font-size: 0.9rem; font-weight: bold; margin-top: 10px; display: block; color: #555; }
-        input, select, textarea { display: block; width: 100%; margin: 5px 0 15px 0; padding: 10px; border: 1px solid #ddd; border-radius: 5px; box-sizing: border-box; }
-        button { width: 100%; padding: 12px; background-color: #764ba2; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 10px; }
-        .wa-btn { background-color: #25d366; margin-top: 20px; text-align: center; text-decoration: none; display: block; padding: 12px; color: white; border-radius: 5px; font-weight: bold; }
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            background: linear-gradient(270deg, #667eea, #764ba2, #3a1c71);
+            background-size: 600% 600%;
+            animation: gradientAnimation 10s ease infinite;
+            display: flex; 
+            justify-content: center; 
+            padding: 20px; 
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container { 
+            background: white; 
+            padding: 30px; 
+            border-radius: 20px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2); 
+            width: 100%; 
+            max-width: 450px; 
+        }
+
+        .logo { width: 120px; display: block; margin: 0 auto 15px auto; }
+
+        h1 { font-size: 1.5rem; text-align: center; color: #333; margin-bottom: 20px; }
+        label { font-size: 0.9rem; font-weight: 600; margin-top: 15px; display: block; color: #444; }
+        input, select, textarea { display: block; width: 100%; margin: 8px 0 15px 0; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        
+        button { 
+            width: 100%; padding: 14px; background-color: #764ba2; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; transition: 0.3s;
+        }
+        button:hover { background-color: #5a377d; transform: scale(1.02); }
+        
+        .wa-btn { 
+            background-color: #25d366; margin-top: 20px; text-align: center; text-decoration: none; display: block; padding: 14px; color: white; border-radius: 8px; font-weight: bold; transition: 0.3s;
+        }
+        .wa-btn:hover { background-color: #1da851; transform: scale(1.02); }
+        
+        .footer-text { text-align: center; font-size: 0.8rem; color: #888; margin-top: 25px; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Formulir PPDB SMP Jayakarta</h1>
+        <img src="logo.png" alt="Logo SMP Jayakarta" class="logo">
+        
+        <h1>PPDB SMP Jayakarta</h1>
         <form action="https://formspree.io/f/xpqeqrpy" method="POST">
             <label>Nama Lengkap</label>
             <input type="text" name="nama" required>
@@ -46,6 +85,10 @@
         </form>
         
         <a href="https://wa.me/6283136106128" class="wa-btn">Tanya Admin via WhatsApp</a>
+        
+        <div class="footer-text">
+            Kado perpisahan dari Reyfalka untuk SMP Jayakarta 😊
+        </div>
     </div>
 </body>
 </html>
