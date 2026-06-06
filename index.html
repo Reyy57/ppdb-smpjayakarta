@@ -28,10 +28,14 @@
         input, select, textarea { 
             display: block; width: 100%; margin-bottom: 20px; padding: 14px; 
             border: 2px solid #eef0f2; border-radius: 12px; font-size: 1rem;
-            transition: all 0.3s ease;
+            transition: all 0.3s ease; box-sizing: border-box;
         }
-        input:focus, textarea:focus { border-color: #56ab2f; outline: none; box-shadow: 0 0 0 4px rgba(86,171,47,0.1); }
+        input:focus, textarea:focus, select:focus { border-color: #56ab2f; outline: none; box-shadow: 0 0 0 4px rgba(86,171,47,0.1); }
         
+        /* Tambahan untuk checkbox */
+        .checkbox-group { margin-bottom: 20px; padding: 10px; border: 2px solid #eef0f2; border-radius: 12px; }
+        .checkbox-group label { display: inline; font-weight: 400; margin-left: 5px; }
+
         button { 
             width: 100%; padding: 16px; background: #2d5a27; color: white; border: none; 
             border-radius: 12px; font-weight: 600; cursor: pointer; transition: 0.3s;
@@ -66,13 +70,21 @@
             <input type="text" name="nama_ortu" required>
             <label>Nomor WhatsApp</label>
             <input type="tel" name="whatsapp" required>
+            
             <label>Gelombang</label>
-            <select name="gelombang">
+            <select name="gelombang" required>
+                <option value="" disabled selected>Pilih Gelombang</option>
                 <option value="Gelombang 1">Gelombang 1</option>
                 <option value="Gelombang 2">Gelombang 2</option>
             </select>
+            
             <label>Minat Ekstrakurikuler</label>
-            <input type="text" name="ekstrakurikuler">
+            <div class="checkbox-group">
+                <input type="checkbox" name="ekskul" value="Voli" id="voli"> <label for="voli">Voli</label><br>
+                <input type="checkbox" name="ekskul" value="Futsal" id="futsal"> <label for="futsal">Futsal</label><br>
+                <input type="checkbox" name="ekskul" value="Tahfidz Al-Qur'an" id="tahfidz"> <label for="tahfidz">Tahfidz Al-Qur'an</label><br>
+                <input type="checkbox" name="ekskul" value="Nari" id="nari"> <label for="nari">Nari</label>
+            </div>
             
             <button type="submit">Kirim Pendaftaran</button>
         </form>
