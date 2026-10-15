@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Absensi Kelas MPLB</title>
+    <style>
+        body { font-family: sans-serif; padding: 15px; background: #f4f4f9; }
+        .card { background: white; padding: 15px; border-radius: 8px; margin-bottom: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .student-name { font-weight: bold; margin-bottom: 10px; font-size: 1.1em; color: #333; }
+        .btn-group { display: flex; gap: 8px; }
+        button { flex: 1; padding: 12px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 1em; opacity: 0.6; transition: 0.2s; }
+        .btn-h { background: #4caf50; color: white; }
+        .btn-i { background: #2196f3; color: white; }
+        .btn-s { background: #ff9800; color: white; }
+        .btn-a { background: #f44336; color: white; }
+        .active { opacity: 1; box-shadow: inset 0 0 5px rgba(0,0,0,0.3); transform: scale(0.95); }
+        .save-btn { width: 100%; padding: 15px; background: #2c3e50; color: white; font-size: 1.1em; border: none; border-radius: 8px; margin-top: 15px; opacity: 1; }
+    </style>
+</head>
+<body>
+
+    <h2>Jurnal & Absensi Kelas</h2>
+    <div id="app"></div>
+    <button class="save-btn" onclick="simpanData()">Simpan Data Hari Ini</button>
+
+    <script>
+        // 1. Struktur Data Siswa
+        const dataSiswa = [
+            { id: 1, nama: "Reyfalka Adiwangsa", status: null },
+            { id: 2, nama: "Gilang", status: null },
+            { id: 3, nama: "Dimas Aditya", status: null }
+        ];
+
+        // 2. Render UI (Nampilin kartu tiap siswa)
+        const app = document.getElementById("app");
+        
+        function renderUI() {
+            app.innerHTML = "";
+            dataSiswa.forEach(siswa => {
+                app.innerHTML += `
+                    <div class="card">
+                        <div class="student-name">${siswa.nama}</div>
+                        <div class="btn-group">
+                            <button class="btn-h ${siswa.status === 'Hadir' ? 'active' : ''}" onclick="absen(${siswa.id}, 'Hadir')">H</button>
+                            <button class="btn-i ${siswa.status === 'Izin' ? 'active' : ''}" onclick="absen(${siswa.id}, 'Izin')">I</button>
+                            <button class="btn-s ${siswa.status === 'Sakit' ? 'active' : ''}" onclick="absen(${siswa.id}, 'Sakit')">S</button>
+                            <button class="btn-a ${siswa.status === 'Alpa' ? 'active' : ''}" onclick="absen(${siswa.id}, 'Alpa')">A</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // 3. Logic buat ngubah status absen
+        function absen(id, status) {
+            let siswa = dataSiswa.find(s => s.id === id);
+            if(siswa) {
+                siswa.status = status;
+                renderUI(); // Render ulang biar tombol yang diklik kelihatan aktif
+            }
+        }
+
+        // 4. Logic simpan data
+        function simpanData() {
+            console.log("Rekap Absen:", dataSiswa);
+            alert("Absen berhasil direkap! Buka console browser buat lihat struktur JSON-nya.");
+        }
+
+        // Panggil render pertama kali
+        renderUI();
+    </script>
+</body>
+</html>
