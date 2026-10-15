@@ -3,127 +3,190 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Absensi & Jurnal MPLB 4</title>
+    <title>Sistem Jurnal & Absensi MPLB</title>
     <style>
-        body { font-family: sans-serif; padding: 15px; background: #f4f4f9; margin: 0; }
-        .header-box { background: white; padding: 15px; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        input[type="date"], textarea { width: 100%; padding: 10px; margin-top: 8px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-family: sans-serif; }
-        textarea { resize: vertical; height: 80px; }
+        /* Variabel Warna Tema */
+        :root {
+            --bg-color: #f4f4f9;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-color: #cccccc;
+        }
+
+        /* Tema Gelap (Dark Mode) */
+        body.dark-mode {
+            --bg-color: #1a1a1a;
+            --card-bg: #2d2d2d;
+            --text-color: #f4f4f9;
+            --border-color: #555555;
+        }
+
+        body { font-family: sans-serif; padding: 15px; background: var(--bg-color); color: var(--text-color); margin: 0; transition: background 0.3s; }
         
-        .card { background: white; padding: 15px; border-radius: 8px; margin-bottom: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .student-name { font-weight: bold; margin-bottom: 10px; font-size: 1.1em; color: #333; }
+        .header-top { display: flex; justify-content: space-between; align-items: center; }
+        .theme-btn { background: #555; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer; }
+        
+        .box { background: var(--card-bg); padding: 15px; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        
+        input, textarea { 
+            width: 100%; padding: 10px; margin-top: 8px; margin-bottom: 10px;
+            border: 1px solid var(--border-color); border-radius: 5px; 
+            box-sizing: border-box; font-family: sans-serif;
+            background: var(--bg-color); color: var(--text-color);
+        }
+        textarea { resize: vertical; height: 70px; }
+        
+        .student-name { font-weight: bold; margin-bottom: 10px; font-size: 1.1em; }
         
         .btn-group { display: flex; gap: 8px; }
-        button { flex: 1; padding: 12px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 1em; opacity: 0.6; transition: 0.2s; }
+        button.absen-btn { flex: 1; padding: 12px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 1em; opacity: 0.4; transition: 0.2s; }
         .btn-h { background: #4caf50; color: white; }
         .btn-i { background: #2196f3; color: white; }
         .btn-s { background: #ff9800; color: white; }
         .btn-a { background: #f44336; color: white; }
-        .active { opacity: 1; box-shadow: inset 0 0 5px rgba(0,0,0,0.3); transform: scale(0.95); border: 2px solid #333; }
+        .active { opacity: 1; transform: scale(0.95); box-shadow: 0 0 8px rgba(0,0,0,0.5); }
         
-        .action-btn-group { display: flex; gap: 10px; margin-top: 15px; }
-        .save-btn { background: #2c3e50; color: white; opacity: 1; width: 100%; padding: 15px;}
-        .wa-btn { background: #25D366; color: white; opacity: 1; width: 100%; padding: 15px;}
-        .reset-btn { background: #e74c3c; color: white; opacity: 1; margin-top: 10px; width: 100%; padding: 12px; }
+        .rekap-visual { display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 15px; padding: 10px; background: var(--card-bg); border-radius: 8px; }
+        
+        .action-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+        .action-btn { padding: 15px; border: none; border-radius: 8px; color: white; font-weight: bold; font-size: 1em; cursor: pointer; }
+        .save-btn { background: #2c3e50; }
+        .wa-btn { background: #25D366; }
+        .csv-btn { background: #107c41; grid-column: span 2; }
+        .reset-btn { background: #e74c3c; grid-column: span 2; margin-top: 10px;}
     </style>
 </head>
 <body>
 
-    <h2 style="text-align: center; color: #333; margin-top: 5px;">Jurnal Kelas MPLB 4</h2>
+    <div class="header-top">
+        <h2 style="margin: 0;">Jurnal Kelas MPLB 4</h2>
+        <button class="theme-btn" onclick="toggleTema()">🌙 Tema</button>
+    </div>
+    <br>
     
-    <!-- Kolom Jurnal dan Tanggal -->
-    <div class="header-box">
+    <!-- Kolom Jurnal -->
+    <div class="box">
         <label><b>Tanggal:</b></label>
         <input type="date" id="tanggal" onchange="simpanLokal()">
         
-        <label style="display:block; margin-top:10px;"><b>Catatan Materi / Jurnal:</b></label>
-        <textarea id="jurnal" placeholder="Misal: Mapel Dasar-Dasar MPLB / Sejarah - Mengerjakan tugas..." oninput="simpanLokal()"></textarea>
+        <label style="display:block; margin-top:5px;"><b>Catatan Materi / Jurnal:</b></label>
+        <textarea id="jurnal" placeholder="Misal: Sejarah - Presentasi Kelompok..." oninput="simpanLokal()"></textarea>
     </div>
+
+    <!-- Rekap Cepat -->
+    <div class="rekap-visual" id="rekapVisual">
+        <span style="color:#4caf50;">H: 0</span>
+        <span style="color:#2196f3;">I: 0</span>
+        <span style="color:#ff9800;">S: 0</span>
+        <span style="color:#f44336;">A: 0</span>
+    </div>
+
+    <!-- Kolom Pencarian -->
+    <input type="text" id="searchBox" placeholder="🔍 Cari nama siswa..." onkeyup="renderUI()">
 
     <!-- Tempat Kartu Absensi -->
     <div id="app"></div>
 
-    <!-- Tombol Aksi Bawah -->
-    <div class="action-btn-group">
-        <button class="save-btn" onclick="simpanLokal(true)">Simpan Data</button>
-        <button class="wa-btn" onclick="shareWA()">Share ke WA</button>
+    <!-- Tombol Aksi -->
+    <div class="action-grid">
+        <button class="action-btn save-btn" onclick="simpanLokal(true)">💾 Simpan Data</button>
+        <button class="action-btn wa-btn" onclick="shareWA()">💬 Share ke WA</button>
+        <button class="action-btn csv-btn" onclick="exportCSV()">📊 Download Excel (CSV)</button>
+        <button class="action-btn reset-btn" onclick="resetData()">🗑️ Reset Absen Hari Ini</button>
     </div>
-    <button class="reset-btn" onclick="resetData()">Reset Absen Hari Ini</button>
 
     <script>
-        // 1. Data Default Siswa 
+        // 1. Data Default Siswa (Bisa ditambahin sebanyak mungkin)
         const defaultSiswa = [
             { id: 1, nama: "Reyfalka Adiwangsa", status: null },
             { id: 2, nama: "Gilang", status: null },
             { id: 3, nama: "Dimas Aditya", status: null },
-            { id: 4, nama: "Siswa Lainnya", status: null }
+            { id: 4, nama: "Putri Anggraeni", status: null },
+            { id: 5, nama: "Siswa Kelima", status: null }
         ];
 
         let dataSiswa = [];
 
-        // 2. Load data dari Local Storage biar nggak hilang pas direfresh
+        // 2. Load Local Storage
         function loadLokal() {
             const simpanan = localStorage.getItem('absenMPLB');
-            const tanggalSimpan = localStorage.getItem('tanggalMPLB');
-            const jurnalSimpan = localStorage.getItem('jurnalMPLB');
+            const tema = localStorage.getItem('temaMPLB');
+            
+            if (simpanan) dataSiswa = JSON.parse(simpanan);
+            else dataSiswa = JSON.parse(JSON.stringify(defaultSiswa));
 
-            if (simpanan) {
-                dataSiswa = JSON.parse(simpanan);
-            } else {
-                dataSiswa = JSON.parse(JSON.stringify(defaultSiswa));
-            }
-
-            if (tanggalSimpan) {
-                document.getElementById("tanggal").value = tanggalSimpan;
-            } else {
-                document.getElementById("tanggal").valueAsDate = new Date(); // Otomatis hari ini
-            }
-
-            if (jurnalSimpan) {
-                document.getElementById("jurnal").value = jurnalSimpan;
-            }
+            document.getElementById("tanggal").value = localStorage.getItem('tanggalMPLB') || new Date().toISOString().split('T')[0];
+            document.getElementById("jurnal").value = localStorage.getItem('jurnalMPLB') || "";
+            
+            if(tema === 'dark') document.body.classList.add('dark-mode');
         }
 
-        // 3. Render UI ke layar
+        // 3. Toggle Dark Mode
+        function toggleTema() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('temaMPLB', isDark ? 'dark' : 'light');
+        }
+
+        // 4. Render UI ke layar + Fitur Search
         const app = document.getElementById("app");
         function renderUI() {
             app.innerHTML = "";
-            dataSiswa.forEach(siswa => {
+            const searchKeyword = document.getElementById("searchBox").value.toLowerCase();
+            
+            const filteredData = dataSiswa.filter(s => s.nama.toLowerCase().includes(searchKeyword));
+            
+            filteredData.forEach(siswa => {
                 app.innerHTML += `
-                    <div class="card">
+                    <div class="box">
                         <div class="student-name">${siswa.nama}</div>
                         <div class="btn-group">
-                            <button class="btn-h ${siswa.status === 'Hadir' ? 'active' : ''}" onclick="absen(${siswa.id}, 'Hadir')">H</button>
-                            <button class="btn-i ${siswa.status === 'Izin' ? 'active' : ''}" onclick="absen(${siswa.id}, 'Izin')">I</button>
-                            <button class="btn-s ${siswa.status === 'Sakit' ? 'active' : ''}" onclick="absen(${siswa.id}, 'Sakit')">S</button>
-                            <button class="btn-a ${siswa.status === 'Alpa' ? 'active' : ''}" onclick="absen(${siswa.id}, 'Alpa')">A</button>
+                            <button class="absen-btn btn-h ${siswa.status === 'Hadir' ? 'active' : ''}" onclick="absen(${siswa.id}, 'Hadir')">Hadir</button>
+                            <button class="absen-btn btn-i ${siswa.status === 'Izin' ? 'active' : ''}" onclick="absen(${siswa.id}, 'Izin')">Izin</button>
+                            <button class="absen-btn btn-s ${siswa.status === 'Sakit' ? 'active' : ''}" onclick="absen(${siswa.id}, 'Sakit')">Sakit</button>
+                            <button class="absen-btn btn-a ${siswa.status === 'Alpa' ? 'active' : ''}" onclick="absen(${siswa.id}, 'Alpa')">Alpa</button>
                         </div>
                     </div>
                 `;
             });
+
+            updateRekap();
         }
 
-        // 4. Update status absen saat tombol diklik
+        // 5. Update Status Absen
         function absen(id, status) {
             let siswa = dataSiswa.find(s => s.id === id);
             if(siswa) {
                 siswa.status = status;
                 renderUI();
-                simpanLokal(false); // Auto-save tiap kali klik absen
+                simpanLokal(false);
             }
         }
 
-        // 5. Simpan ke Local Storage
+        // 6. Update Angka Rekap
+        function updateRekap() {
+            const h = dataSiswa.filter(s => s.status === 'Hadir').length;
+            const i = dataSiswa.filter(s => s.status === 'Izin').length;
+            const s = dataSiswa.filter(s => s.status === 'Sakit').length;
+            const a = dataSiswa.filter(s => s.status === 'Alpa').length;
+            
+            document.getElementById("rekapVisual").innerHTML = `
+                <span style="color:#4caf50;">Hadir: ${h}</span>
+                <span style="color:#2196f3;">Izin: ${i}</span>
+                <span style="color:#ff9800;">Sakit: ${s}</span>
+                <span style="color:#f44336;">Alpa: ${a}</span>
+            `;
+        }
+
+        // 7. Simpan ke Local Storage
         function simpanLokal(showNotif = false) {
             localStorage.setItem('absenMPLB', JSON.stringify(dataSiswa));
             localStorage.setItem('tanggalMPLB', document.getElementById("tanggal").value);
             localStorage.setItem('jurnalMPLB', document.getElementById("jurnal").value);
-            if(showNotif) {
-                alert("Data tersimpan aman di HP!");
-            }
+            if(showNotif) alert("Data berhasil disimpan!");
         }
 
-        // 6. Reset absen (buat dipakai di hari berikutnya)
+        // 8. Reset Data
         function resetData() {
             if(confirm("Yakin mau mengosongkan absen hari ini?")) {
                 dataSiswa = JSON.parse(JSON.stringify(defaultSiswa));
@@ -133,37 +196,42 @@
             }
         }
 
-        // 7. Format tulisan lalu kirim ke WhatsApp
+        // 9. Share ke WhatsApp
         function shareWA() {
             const tanggal = document.getElementById("tanggal").value;
             const jurnal = document.getElementById("jurnal").value || "-";
             
-            let textWA = `*JURNAL & ABSENSI KELAS* 📚\n`;
-            textWA += `Tanggal: ${tanggal}\n`;
-            textWA += `Catatan/Materi: ${jurnal}\n\n`;
-            textWA += `*Keterangan Kehadiran:*\n`;
-
+            let textWA = `*JURNAL & ABSENSI KELAS MPLB 4* 📚\nTanggal: ${tanggal}\nCatatan/Materi: ${jurnal}\n\n*Keterangan Kehadiran:*\n`;
             dataSiswa.forEach(s => {
-                const status = s.status ? s.status : "Belum diabsen";
-                textWA += `- ${s.nama}: ${status}\n`;
+                textWA += `- ${s.nama}: ${s.status ? s.status : "Belum diabsen"}\n`;
             });
 
-            // Ngitung rekap otomatis
-            const hadir = dataSiswa.filter(s => s.status === 'Hadir').length;
-            const izin = dataSiswa.filter(s => s.status === 'Izin').length;
-            const sakit = dataSiswa.filter(s => s.status === 'Sakit').length;
-            const alpa = dataSiswa.filter(s => s.status === 'Alpa').length;
-
-            textWA += `\n*Rekapitulasi:*\nHadir: ${hadir}\nIzin: ${izin}\nSakit: ${sakit}\nAlpa: ${alpa}`;
-
             const encodeWA = encodeURIComponent(textWA);
-            // Buka aplikasi/web WA
             window.open(`https://wa.me/?text=${encodeWA}`, '_blank');
         }
 
-        // Jalankan pas pertama kali web dibuka
+        // 10. Export Excel (CSV)
+        function exportCSV() {
+            const tgl = document.getElementById("tanggal").value;
+            let csvContent = "data:text/csv;charset=utf-8,ID,Nama Siswa,Status,Tanggal\n";
+            
+            dataSiswa.forEach(s => {
+                const status = s.status || "Belum diabsen";
+                csvContent += `${s.id},"${s.nama}","${status}",${tgl}\n`;
+            });
+            
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `Data_Absen_MPLB_${tgl}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Init Aplikasi
         loadLokal();
         renderUI();
     </script>
 </body>
-    </html>
+</html>
